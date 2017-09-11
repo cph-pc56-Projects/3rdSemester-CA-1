@@ -1,5 +1,5 @@
 # 3rdSemester-CA-1
 First Collective Assignment for 3rd Semester
 ## Team Members:
-Petru Catana
+Petru Catana ,
 Felesiah Krøier
