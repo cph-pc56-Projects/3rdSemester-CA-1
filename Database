@@ -1,0 +1,173 @@
+-- MySQL Workbench Forward Engineering
+ 
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+ 
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema ca1
+-- -----------------------------------------------------
+ 
+-- -----------------------------------------------------
+-- Schema ca1
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `ca1` DEFAULT CHARACTER SET utf8 ;
+USE `ca1` ;
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`cityinfo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`cityinfo` (
+  `zip` INT(11) NOT NULL,
+  `city` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`zip`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`address`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`address` (
+  `street` INT(11) NOT NULL,
+  `additionalInfo` VARCHAR(45) NULL DEFAULT NULL,
+  `CityInfo_zipCode` INT(11) NOT NULL,
+  PRIMARY KEY (`street`, `CityInfo_zipCode`),
+  INDEX `fk_Address_CityInfo_idx` (`CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_Address_CityInfo`
+    FOREIGN KEY (`CityInfo_zipCode`)
+    REFERENCES `ca1`.`cityinfo` (`zip`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`infoentity`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`infoentity` (
+  `id` INT(11) NOT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `Address_street` INT(11) NOT NULL,
+  `Address_CityInfo_zipCode` INT(11) NOT NULL,
+  PRIMARY KEY (`id`, `Address_street`, `Address_CityInfo_zipCode`),
+  INDEX `fk_InfoEntity_Address1_idx` (`Address_street` ASC, `Address_CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_InfoEntity_Address1`
+    FOREIGN KEY (`Address_street` , `Address_CityInfo_zipCode`)
+    REFERENCES `ca1`.`address` (`street` , `CityInfo_zipCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`company`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`company` (
+  `id` INT(11) NOT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `description` VARCHAR(45) NULL DEFAULT NULL,
+  `cvr` INT(11) NULL DEFAULT NULL,
+  `numEmployees` INT(11) NULL DEFAULT NULL,
+  `marketValue` INT(11) NULL DEFAULT NULL,
+  `InfoEntity_id` INT(11) NOT NULL,
+  `InfoEntity_Address_street` INT(11) NOT NULL,
+  `InfoEntity_Address_CityInfo_zipCode` INT(11) NOT NULL,
+  PRIMARY KEY (`id`, `InfoEntity_id`, `InfoEntity_Address_street`, `InfoEntity_Address_CityInfo_zipCode`),
+  INDEX `fk_Company_InfoEntity1_idx` (`InfoEntity_id` ASC, `InfoEntity_Address_street` ASC, `InfoEntity_Address_CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_Company_InfoEntity1`
+    FOREIGN KEY (`InfoEntity_id` , `InfoEntity_Address_street` , `InfoEntity_Address_CityInfo_zipCode`)
+    REFERENCES `ca1`.`infoentity` (`id` , `Address_street` , `Address_CityInfo_zipCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`hobby`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`hobby` (
+  `id` INT(11) NOT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `description` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`person`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`person` (
+  `id` INT(11) NOT NULL,
+  `firstName` VARCHAR(45) NULL DEFAULT NULL,
+  `lastname` VARCHAR(45) NULL DEFAULT NULL,
+  `InfoEntity_id` INT(11) NOT NULL,
+  `InfoEntity_Address_street` INT(11) NOT NULL,
+  `InfoEntity_Address_CityInfo_zipCode` INT(11) NOT NULL,
+  PRIMARY KEY (`id`, `InfoEntity_id`, `InfoEntity_Address_street`, `InfoEntity_Address_CityInfo_zipCode`),
+  INDEX `fk_Person_InfoEntity1_idx` (`InfoEntity_id` ASC, `InfoEntity_Address_street` ASC, `InfoEntity_Address_CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_Person_InfoEntity1`
+    FOREIGN KEY (`InfoEntity_id` , `InfoEntity_Address_street` , `InfoEntity_Address_CityInfo_zipCode`)
+    REFERENCES `ca1`.`infoentity` (`id` , `Address_street` , `Address_CityInfo_zipCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`person_has_hobby`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`person_has_hobby` (
+  `Person_id` INT(11) NOT NULL,
+  `Person_InfoEntity_id` INT(11) NOT NULL,
+  `Person_InfoEntity_Address_street` INT(11) NOT NULL,
+  `Person_InfoEntity_Address_CityInfo_zipCode` INT(11) NOT NULL,
+  `Hobby_id` INT(11) NOT NULL,
+  PRIMARY KEY (`Person_id`, `Person_InfoEntity_id`, `Person_InfoEntity_Address_street`, `Person_InfoEntity_Address_CityInfo_zipCode`, `Hobby_id`),
+  INDEX `fk_Person_has_Hobby_Hobby1_idx` (`Hobby_id` ASC),
+  INDEX `fk_Person_has_Hobby_Person1_idx` (`Person_id` ASC, `Person_InfoEntity_id` ASC, `Person_InfoEntity_Address_street` ASC, `Person_InfoEntity_Address_CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_Person_has_Hobby_Hobby1`
+    FOREIGN KEY (`Hobby_id`)
+    REFERENCES `ca1`.`hobby` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Person_has_Hobby_Person1`
+    FOREIGN KEY (`Person_id` , `Person_InfoEntity_id` , `Person_InfoEntity_Address_street` , `Person_InfoEntity_Address_CityInfo_zipCode`)
+    REFERENCES `ca1`.`person` (`id` , `InfoEntity_id` , `InfoEntity_Address_street` , `InfoEntity_Address_CityInfo_zipCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+-- -----------------------------------------------------
+-- Table `ca1`.`phone`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ca1`.`phone` (
+  `number` INT(11) NOT NULL,
+  `description` VARCHAR(45) NULL DEFAULT NULL,
+  `InfoEntity_id` INT(11) NOT NULL,
+  `InfoEntity_Address_street` INT(11) NOT NULL,
+  `InfoEntity_Address_CityInfo_zipCode` INT(11) NOT NULL,
+  PRIMARY KEY (`number`, `InfoEntity_id`, `InfoEntity_Address_street`, `InfoEntity_Address_CityInfo_zipCode`),
+  INDEX `fk_Phone_InfoEntity1_idx` (`InfoEntity_id` ASC, `InfoEntity_Address_street` ASC, `InfoEntity_Address_CityInfo_zipCode` ASC),
+  CONSTRAINT `fk_Phone_InfoEntity1`
+    FOREIGN KEY (`InfoEntity_id` , `InfoEntity_Address_street` , `InfoEntity_Address_CityInfo_zipCode`)
+    REFERENCES `ca1`.`infoentity` (`id` , `Address_street` , `Address_CityInfo_zipCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ 
+ 
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
