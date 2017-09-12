@@ -90,12 +90,15 @@ public class Main {
         List<Phone> cps = new ArrayList();
         c.setPhonelist(cps);
         
+        
         Hobby hobby = new Hobby();
         hobby.setName("Reading");
         hobby.setDescription("SCI-FI");
-        List<Person> personH = new ArrayList();
-        personH.add(person);
-        hobby.setPerson(personH);
+        hobby.setPerson(person);
+        
+        
+        person.setHobby(hobby);
+        
         
         
         em.getTransaction().begin();

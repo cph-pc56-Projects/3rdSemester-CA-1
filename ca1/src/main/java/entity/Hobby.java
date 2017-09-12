@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -23,14 +24,20 @@ public class Hobby implements Serializable {
     private String description;
     
     @ManyToMany(targetEntity = Person.class)
-    private List<Person> person;
+    private List<Person> persons;
 
-    public List<Person> getPerson() {
-        return person;
+    public List<Person> getPersons() {
+        return persons;
     }
 
-    public void setPerson(List<Person> person) {
-        this.person = person;
+    public void setPerson(Person person) {
+        
+        if(persons == null){
+            persons = new ArrayList();
+        }
+
+        persons.add(person);
+        
     }
 
     
