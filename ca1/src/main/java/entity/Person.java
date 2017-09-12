@@ -27,7 +27,7 @@ public class Person extends InfoEntity implements Serializable {
         return hobbies;
     }
 
-    public void setHobby(Hobby hobby) {        
+    public void addHobby(Hobby hobby) {        
         if (hobbies == null){
             hobbies = new ArrayList();
         }

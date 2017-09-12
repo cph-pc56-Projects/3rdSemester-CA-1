@@ -30,7 +30,7 @@ public class Hobby implements Serializable {
         return persons;
     }
 
-    public void setPerson(Person person) {
+    public void addPerson(Person person) {
         
         if(persons == null){
             persons = new ArrayList();

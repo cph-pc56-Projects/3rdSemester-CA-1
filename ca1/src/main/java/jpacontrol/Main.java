@@ -73,6 +73,7 @@ public class Main {
         person.setPhonelist(phonesP);
         
         
+        
         Company c = new Company();
         c.setName("Tesla");
         c.setDescription("Energy Company");
@@ -94,10 +95,17 @@ public class Main {
         Hobby hobby = new Hobby();
         hobby.setName("Reading");
         hobby.setDescription("SCI-FI");
-        hobby.setPerson(person);
+        hobby.addPerson(person);
+        person.addHobby(hobby); 
         
+        Person p2 = new Person();
+        p2.setFirstName("Patrick");
+        p2.setLastName("Fenger");
+        p2.setEmail("patricia@pland.com");     
+        hobby.addPerson(p2);
+        p2.addHobby(hobby);
         
-        person.setHobby(hobby);
+            
         
         
         
@@ -109,6 +117,7 @@ public class Main {
         em.persist(c);
         em.persist(ac);
         em.persist(cp);
+        em.persist(p2);
         em.getTransaction().commit();
         em.close();
     }
