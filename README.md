@@ -3,4 +3,5 @@ First Collective Assignment for 3rd Semester
 ## Team Members:
 Petru Catana ,
 Felesiah Krøier ,
-Patrick Fenger
+Patrick Fenger ,
+Marco Frydshou
