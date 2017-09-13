@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Entity
 public class Hobby implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private int hobby_id;
     private String name;
