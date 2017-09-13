@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author trez__000
  */
 @Entity
-@XmlRootElement
+
 public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
