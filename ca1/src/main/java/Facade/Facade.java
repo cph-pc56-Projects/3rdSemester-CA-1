@@ -37,7 +37,7 @@ public class Facade {
 
     public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
-
+        
         try {
             em.getTransaction().begin();
             Person p = em.find(Person.class, id);
@@ -98,9 +98,11 @@ public class Facade {
     
     public List<Person>getPersons(){
         EntityManager em = emf.createEntityManager();
+        List<Person> persons;
         try{
             Query qu = em.createQuery("SELECT p FROM Person p");             
-            return qu.getResultList();
+            persons = qu.getResultList();
+            return persons;
             
         }finally{
             em.close();

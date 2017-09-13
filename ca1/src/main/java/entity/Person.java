@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author trez__000
  */
 @Entity
+@XmlRootElement
 public class Person extends InfoEntity implements Serializable {      
     
     private String firstName;
@@ -23,6 +26,7 @@ public class Person extends InfoEntity implements Serializable {
     @ManyToMany (targetEntity = Hobby.class)
     private List<Hobby> hobbies;
 
+    @XmlTransient
     public List<Hobby> getHobbies() {
         return hobbies;
     }

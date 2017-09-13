@@ -20,6 +20,7 @@ public class FacadeRunner {
         
         
         System.out.println(pf.getCity(1710).getCity());
+        System.out.println(pf.getPersons().get(0).getFirstName());
         
     }
 }

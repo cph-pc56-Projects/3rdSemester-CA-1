@@ -7,12 +7,14 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author trez__000
  */
 @Entity
+@XmlRootElement
 public class Phone implements Serializable {
     
     @Id
