@@ -32,11 +32,11 @@ public class Facade {
         this.emf = emf;
     }
 
-    public EntityManager getentity() {
+    public EntityManager getEntity() {
         return emf.createEntityManager();
     }
 
-    public Person getperson(int id) {
+    public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -50,7 +50,7 @@ public class Facade {
         }
     }
 
-    public Person editperson(Person p) {
+    public Person editPerson(Person p) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -63,7 +63,7 @@ public class Facade {
         }
     }
 
-    public Person deleteperson(int id) {
+    public Person deletePerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -83,7 +83,7 @@ public class Facade {
 
     }
     
-    public Person addperson(Person p){
+    public Person addPerson(Person p){
         EntityManager em = emf.createEntityManager();
         try{
             em.getTransaction().begin();
@@ -97,7 +97,7 @@ public class Facade {
         
     }
     
-    public List<Person>getpersons(){
+    public List<Person>getPersons(){
         EntityManager em = emf.createEntityManager();
         try{
             Query qu = em.createNamedQuery("");
@@ -110,7 +110,7 @@ public class Facade {
                 
     }
     
-    public List<Person> getpersonsbyid(int zipCode){
+    public List<Person> getPersonsByZip(int zipCode){
         EntityManager em = emf.createEntityManager();
         
         try{
@@ -124,7 +124,7 @@ public class Facade {
         
     }
     
-    public Address getadress(int id) {
+    public Address getAddress(int id) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -138,7 +138,7 @@ public class Facade {
 
     }
 
-    public Address adadress(Address adr) {
+    public Address addAddress(Address adr) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -153,7 +153,7 @@ public class Facade {
 
     }
 
-    public Address editadress(Address ad) {
+    public Address editAddress(Address ad) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -167,7 +167,7 @@ public class Facade {
 
     }
 
-    public Address deleteadress(Address adress) {
+    public Address deleteAddress(Address adress) {
         EntityManager em = emf.createEntityManager();
 
         try {
