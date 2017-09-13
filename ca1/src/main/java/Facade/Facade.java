@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import entity.Address;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,13 +16,13 @@ import javax.persistence.Query;
  *
  * @author marcofrydshou1
  */
-public class PersonFacade {
+public class Facade {
     
-     public PersonFacade(EntityManagerFactory emf) {
+     public Facade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public PersonFacade() {
+    public Facade() {
 
     }
 
@@ -121,6 +122,67 @@ public class PersonFacade {
             em.close();
         }
         
+    }
+    
+    public Address getadress(int id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Address a = em.find(Address.class, id);
+            em.getTransaction().commit();
+            return a;
+
+        } finally {
+            em.close();
+        }
+
+    }
+
+    public Address adadress(Address adr) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(adr);
+            em.getTransaction().commit();
+            return adr;
+
+        } finally {
+            em.close();
+        }
+
+    }
+
+    public Address editadress(Address ad) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(ad);
+            em.getTransaction().commit();
+            return ad;
+
+        } finally {
+            em.close();
+        }
+
+    }
+
+    public Address deleteadress(Address adress) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            Address a = em.find(Address.class, adress.getAdress_id());
+            if (a != null) {
+                em.getTransaction().begin();
+                em.remove(a);
+                em.getTransaction().commit();
+            }
+            return a;
+
+        } finally {
+            em.close();
+        }
+
     }
     
     

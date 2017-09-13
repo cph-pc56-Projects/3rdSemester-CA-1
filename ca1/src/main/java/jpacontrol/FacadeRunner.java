@@ -5,7 +5,7 @@
  */
 package jpacontrol;
 
-import Facade.PersonFacade;
+import Facade.Facade;
 import entity.Person;
 import javax.persistence.Persistence;
 
@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
  */
 public class FacadeRunner {
     public static void main(String[] args) {
-        PersonFacade pf = new PersonFacade();
+        Facade pf = new Facade();
         pf.addEntityManagerFactory(Persistence.createEntityManagerFactory("ca1"));
         
         Person person = new Person();
