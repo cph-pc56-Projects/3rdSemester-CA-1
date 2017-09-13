@@ -6,6 +6,7 @@
 package Facade;
 
 import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -183,6 +184,18 @@ public class Facade {
 
     }
     
-    
+    public CityInfo getCity(int zipCode){
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            em.getTransaction().begin();
+            CityInfo c = em.find(CityInfo.class, zipCode);            
+            em.getTransaction().commit();  
+            return c;
+        }
+        finally{
+            em.close();
+        }
+    }
     
 }

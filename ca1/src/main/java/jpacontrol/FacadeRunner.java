@@ -6,7 +6,6 @@
 package jpacontrol;
 
 import Facade.Facade;
-import entity.Person;
 import javax.persistence.Persistence;
 
 /**
@@ -18,15 +17,9 @@ public class FacadeRunner {
         Facade pf = new Facade();
         pf.addEntityManagerFactory(Persistence.createEntityManagerFactory("ca1"));
         
-        Person person = new Person();
-        person.setFirstName("Mike");
-        person.setLastName("Burner");
-        person.setEmail("mike@burner.io");
         
-        pf.addPerson(person);
         
-        System.out.println(pf.getPerson(2).getFirstName());
-        System.out.println(pf.getPersons());
+        System.out.println(pf.getCity(1710).getCity());
         
     }
 }
