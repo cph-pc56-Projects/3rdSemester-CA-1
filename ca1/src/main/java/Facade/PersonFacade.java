@@ -39,8 +39,9 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
 
         try {
-            em.getTransaction();
+            em.getTransaction().begin();
             Person p = em.find(Person.class, id);
+            em.getTransaction().commit();
             return p;
 
         } finally {
