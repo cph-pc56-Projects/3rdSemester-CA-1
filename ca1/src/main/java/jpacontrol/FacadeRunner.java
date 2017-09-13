@@ -23,7 +23,7 @@ public class FacadeRunner {
         person.setLastName("Burner");
         person.setEmail("mike@burner.io");
         
-        pf.addperson(person);
+        pf.addPerson(person);
         
     }
 }
