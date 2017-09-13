@@ -8,6 +8,7 @@ package Facade;
 import entity.Address;
 import entity.CityInfo;
 import entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,15 +19,6 @@ import javax.persistence.Query;
  * @author marcofrydshou1
  */
 public class Facade {
-    
-     public Facade(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
-    public Facade() {
-
-    }
-
     EntityManagerFactory emf;
 
     public void addEntityManagerFactory(EntityManagerFactory emf) {
@@ -100,7 +92,7 @@ public class Facade {
         EntityManager em = emf.createEntityManager();
         List<Person> persons;
         try{
-            Query qu = em.createQuery("SELECT p FROM Person p");             
+            Query qu = em.createQuery("SELECT p FROM Person p");                
             persons = qu.getResultList();
             return persons;
             
