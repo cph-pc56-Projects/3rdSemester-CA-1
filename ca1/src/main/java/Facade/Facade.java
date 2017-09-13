@@ -32,9 +32,7 @@ public class Facade {
         this.emf = emf;
     }
 
-    public EntityManager getEntity() {
-        return emf.createEntityManager();
-    }
+    
 
     public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
@@ -100,7 +98,7 @@ public class Facade {
     public List<Person>getPersons(){
         EntityManager em = emf.createEntityManager();
         try{
-            Query qu = em.createNamedQuery("");
+            Query qu = em.createQuery("SELECT p FROM Person p");             
             return qu.getResultList();
             
         }finally{

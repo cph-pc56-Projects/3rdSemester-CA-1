@@ -25,5 +25,8 @@ public class FacadeRunner {
         
         pf.addPerson(person);
         
+        System.out.println(pf.getPerson(2).getFirstName());
+        System.out.println(pf.getPersons());
+        
     }
 }

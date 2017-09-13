@@ -103,6 +103,7 @@ public class Main {
         p2.setLastName("Fenger");
         p2.setEmail("patricia@pland.com");     
         hobby.addPerson(p2);
+        p2.setAddress(address);        
         p2.addHobby(hobby);
         
             
