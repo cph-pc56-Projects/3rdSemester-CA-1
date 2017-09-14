@@ -17,24 +17,16 @@ public class CityInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private int cityInfo_id;
-    private int ZipCode;
+    
+    private int Zip;
     private String city;
 
-    public int getCityInfo_id() {
-        return cityInfo_id;
-    }
-
-    public void setCityInfo_id(int cityInfo_id) {
-        this.cityInfo_id = cityInfo_id;
-    }
-
     public int getZipCode() {
-        return ZipCode;
+        return Zip;
     }
 
     public void setZipCode(int ZipCode) {
-        this.ZipCode = ZipCode;
+        this.Zip = ZipCode;
     }
 
     public String getCity() {
