@@ -17,6 +17,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import mappers.PersonsMapper;
 
@@ -43,13 +44,13 @@ public class PersonResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("all1")
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
         List<Person> persons = fc.getPersons();
         return gson.toJson(new PersonsMapper(persons));
-    }
-
+    }  
+   
     /**
      * PUT method for updating or creating an instance of PersonResource
      * @param content representation for the resource

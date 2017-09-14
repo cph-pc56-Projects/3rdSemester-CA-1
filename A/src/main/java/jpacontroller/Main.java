@@ -25,7 +25,7 @@ import javax.persistence.Persistence;
  */
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca1");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
         
         Phone phone1 = new Phone();
