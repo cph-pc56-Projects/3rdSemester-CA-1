@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jpacontrol;
+package jpacontroller;
 
 
 import entity.Address;
@@ -73,7 +73,6 @@ public class Main {
         person.setPhonelist(phonesP);
         
         
-        
         Company c = new Company();
         c.setName("Tesla");
         c.setDescription("Energy Company");
@@ -91,23 +90,11 @@ public class Main {
         List<Phone> cps = new ArrayList();
         c.setPhonelist(cps);
         
-        
         Hobby hobby = new Hobby();
         hobby.setName("Reading");
-        hobby.setDescription("SCI-FI");
+        hobby.setDescription("SCI-FI");        
         hobby.addPerson(person);
-        person.addHobby(hobby); 
-        
-        Person p2 = new Person();
-        p2.setFirstName("Patrick");
-        p2.setLastName("Fenger");
-        p2.setEmail("patricia@pland.com");     
-        hobby.addPerson(p2);
-        p2.setAddress(address);        
-        p2.addHobby(hobby);
-        
-            
-        
+        person.addHobby(hobby);
         
         
         em.getTransaction().begin();
@@ -118,7 +105,6 @@ public class Main {
         em.persist(c);
         em.persist(ac);
         em.persist(cp);
-        em.persist(p2);
         em.getTransaction().commit();
         em.close();
     }

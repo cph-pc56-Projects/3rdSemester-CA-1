@@ -5,21 +5,20 @@
  */
 package rest;
 
-import Facade.Facade;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entity.Person;
-import java.util.ArrayList;
+import facade.Facade;
 import java.util.List;
-import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import mappers.PersonsMapper;
 
 /**
  * REST Web Service
@@ -28,8 +27,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("person")
 public class PersonResource {
-    public Facade fc;
-    public Gson gson;
+    private static Facade fc = new Facade();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Context
     private UriInfo context;
 
@@ -37,9 +36,6 @@ public class PersonResource {
      * Creates a new instance of PersonResource
      */
     public PersonResource() {
-        fc = new Facade();
-        fc.addEntityManagerFactory(Persistence.createEntityManagerFactory("ca1"));
-        gson = new Gson();
     }
 
     /**
@@ -47,15 +43,11 @@ public class PersonResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("all")
+    @Path("all1")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {        
-        List<Person> list = new ArrayList();
-        Person p = new Person();
-        p.setFirstName("Petru");
-        p.setLastName("Catana");
-        list.add(p);
-        return gson.toJson(list);
+    public String getJson() {
+        List<Person> persons = fc.getPersons();
+        return gson.toJson(new PersonsMapper(persons));
     }
 
     /**
