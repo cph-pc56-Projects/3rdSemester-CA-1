@@ -21,7 +21,7 @@ public class Facade {
     EntityManagerFactory emf;
     
     public Facade(){
-        emf = Persistence.createEntityManagerFactory("ca1");
+        emf = Persistence.createEntityManagerFactory("pu");
     }
 
     public Person getPerson(int id) {
