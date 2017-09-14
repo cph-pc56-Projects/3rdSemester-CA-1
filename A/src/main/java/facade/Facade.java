@@ -5,6 +5,7 @@
  */
 package facade;
 
+import entity.Company;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -94,6 +95,19 @@ public class Facade {
             return persons;
 
         } finally {
+            em.close();
+        }
+    }
+    
+    public List<Company> getCompanies(){
+        EntityManager em = emf.createEntityManager();
+        List<Company> companies;
+        try{
+            Query qu = em.createQuery("SELECT c FROM Company c");
+            companies = qu.getResultList();
+            return companies;
+        }
+        finally {
             em.close();
         }
     }

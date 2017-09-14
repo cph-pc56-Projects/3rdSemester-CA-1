@@ -20,5 +20,6 @@ public class FacadeRunner {
         p.setLastName("Moreno");
         fc.addPerson(p);
         System.out.println(fc.getPersons().toString());
+        System.out.println(fc.getCompanies().toString());
     }
 }
