@@ -5,23 +5,22 @@
  */
 package mappers;
 
-import entity.Person;
+import entity.CityInfo;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author trez__000
+ * @author felesiah
  */
-public class PersonsMapper {
-    public List<PersonMapper> persons = new ArrayList();
+public class CitiesMapper {
+     public List<CityInfoMapper> cities = new ArrayList();
     
-    public PersonsMapper(List<Person> persons, boolean addHobby){
-        for (Person p: persons) {
-            this.persons.add(new PersonMapper(p, addHobby));
+    public CitiesMapper(List<CityInfo> cities){
+        for (CityInfo c: cities) {
+            this.cities.add(new CityInfoMapper(c));
         }
         
     }
     
 }
-

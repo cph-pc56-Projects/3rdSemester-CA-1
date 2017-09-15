@@ -1,4 +1,3 @@
-
 package rest;
 
 import com.google.gson.Gson;
@@ -62,3 +61,4 @@ public class PersonResource {
     public void putJson(String content) {
     }
 }
+

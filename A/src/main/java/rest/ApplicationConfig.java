@@ -31,6 +31,9 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(rest.HobbyResource.class);
         resources.add(rest.PersonResource.class);
+        resources.add(CustomExceptions.PersonNotFoundExceptionMapper.class);
+        resources.add(rest.CityInfoResource.class);
+        resources.add(rest.CompanyResource.class);
     }
     
 }

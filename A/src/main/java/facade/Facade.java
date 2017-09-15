@@ -177,4 +177,31 @@ public class Facade {
             em.close();
         }
     }
+  
+  public CityInfo getCity(int zipCode){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            CityInfo c = em.find(CityInfo.class, zipCode);            
+            em.getTransaction().commit();  
+            return c;
+        }
+        finally{
+            em.close();
+        }
+    }
+    
+     public List<CityInfo> getZipcodes() {
+        EntityManager em = emf.createEntityManager();
+        List<CityInfo> cityinfo;
+        try {
+            Query qu = em.createQuery("SELECT c FROM CityInfo c");
+            cityinfo = qu.getResultList();
+            return cityinfo;
+
+        } finally {
+            em.close();
+        }
+    }
 }
+
