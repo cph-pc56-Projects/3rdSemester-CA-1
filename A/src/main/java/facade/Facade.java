@@ -5,6 +5,8 @@
  */
 package facade;
 
+import entity.Company;
+import entity.Hobby;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,14 +21,13 @@ import javax.persistence.Query;
 public class Facade {
 
     EntityManagerFactory emf;
-    
-    public Facade(){
+
+    public Facade() {
         emf = Persistence.createEntityManagerFactory("pu");
     }
 
     public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
-
         try {
             em.getTransaction().begin();
             Person p = em.find(Person.class, id);
@@ -82,7 +83,20 @@ public class Facade {
         } finally {
 
         }
-
+    }
+    
+    public void addHobbyToPerson(Hobby hobby, int personId){
+        EntityManager em = emf.createEntityManager();
+        Person person = getPerson(personId);
+        person.addHobby(hobby);
+        try{
+            em.getTransaction().begin();
+            em.merge(person);
+            em.getTransaction().commit();
+        }
+        finally{
+            em.close();
+        }
     }
 
     public List<Person> getPersons() {
@@ -94,6 +108,72 @@ public class Facade {
             return persons;
 
         } finally {
+            em.close();
+        }
+    }
+
+    public List<Company> getCompanies() {
+        EntityManager em = emf.createEntityManager();
+        List<Company> companies;
+        try {
+            Query qu = em.createQuery("SELECT c FROM Company c");
+            companies = qu.getResultList();
+            return companies;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Hobby> getHobbies() {
+        EntityManager em = emf.createEntityManager();
+        List<Hobby> hobbies;
+        try {
+            Query qu = em.createQuery("SELECT h FROM Hobby h");
+            hobbies = qu.getResultList();
+            return hobbies;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Hobby getHobby(int hobbyId){
+        EntityManager em = emf.createEntityManager();
+        Hobby hobby;
+        try{
+            em.getTransaction().begin();
+            hobby = em.find(Hobby.class, hobbyId);
+            em.getTransaction().commit();
+            return hobby;
+        }
+        finally{
+            em.close();
+        }
+    }
+
+    public void addHobby(String name, String description) {
+        EntityManager em = emf.createEntityManager();
+        Hobby h = new Hobby();
+        h.setName(name);
+        h.setDescription(description);
+        try {
+            em.getTransaction().begin();
+            em.persist(h);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void addPersonToHobby(Person p, int hobbyId){
+        EntityManager em = emf.createEntityManager();
+        Hobby hobby = getHobby(hobbyId);
+        hobby.addPerson(p);
+        try{
+            em.getTransaction().begin();
+            em.merge(hobby);
+            em.getTransaction().commit();
+        }
+        finally{
             em.close();
         }
     }

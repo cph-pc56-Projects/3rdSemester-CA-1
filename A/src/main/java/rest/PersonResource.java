@@ -38,7 +38,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
         List<Person> persons = fc.getPersons();
-        return gson.toJson(new PersonsMapper(persons));
+        return gson.toJson(new PersonsMapper(persons, false));
     }
 
     @GET
@@ -53,7 +53,7 @@ public class PersonResource {
                 error.addProperty("message", "No person with provided id found");
                 return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(error)).build();
             }
-            PersonMapper pm = new PersonMapper(p);
+            PersonMapper pm = new PersonMapper(p, false);
             return Response.status(Response.Status.OK).entity(gson.toJson(pm)).build();
     }
     

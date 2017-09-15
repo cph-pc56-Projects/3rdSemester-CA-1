@@ -47,7 +47,8 @@ public class Main {
         
         CityInfo cityinfo = new CityInfo();
         cityinfo.setCity("Copenhagen");
-        cityinfo.setZipCode(1720);
+        cityinfo.setZip(1720);
+        
         
         Address address = new Address();
         address.setStreet("Sonder Boulevard");

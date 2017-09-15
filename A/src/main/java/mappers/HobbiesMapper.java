@@ -5,7 +5,7 @@
  */
 package mappers;
 
-import entity.Person;
+import entity.Hobby;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +13,12 @@ import java.util.List;
  *
  * @author trez__000
  */
-public class PersonsMapper {
-    public List<PersonMapper> persons = new ArrayList();
+public class HobbiesMapper {
+    public List<HobbyMapper> hobbies = new ArrayList();
     
-    public PersonsMapper(List<Person> persons, boolean addHobby){
-        for (Person p: persons) {
-            this.persons.add(new PersonMapper(p, addHobby));
+    public HobbiesMapper(List<Hobby> hobbies){
+        for (Hobby h: hobbies){
+            this.hobbies.add(new HobbyMapper(h));
         }
-        
     }
-    
 }

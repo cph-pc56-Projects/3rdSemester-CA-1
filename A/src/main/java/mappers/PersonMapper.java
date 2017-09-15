@@ -5,7 +5,10 @@
  */
 package mappers;
 
+import entity.Hobby;
 import entity.Person;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,10 +17,19 @@ import entity.Person;
 public class PersonMapper {
     public String fName;
     public String lName;
+    public List<String> hobbies;
     
-    public PersonMapper(Person person){
+    public PersonMapper(Person person, boolean addHobby){
         this.fName = person.getFirstName();
         this.lName = person.getLastName();
+        if (addHobby){
+            hobbies = new ArrayList();
+            for (Hobby h: person.getHobbies()){
+                hobbies.add(h.getName());
+            }
+        }
     }
+    
+    
     
 }
