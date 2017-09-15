@@ -39,7 +39,7 @@ public class FacadeRunner {
         for(Person p: ppl){
             System.out.println(p.getFirstName());
         }
-        fc.addHobbyToPerson(fc.getHobby(4), 7);
+       
         
     }
 }

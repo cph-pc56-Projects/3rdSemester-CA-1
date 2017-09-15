@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package facade;
-
+import entity.CityInfo;
 import entity.Company;
 import entity.Hobby;
 import entity.Person;

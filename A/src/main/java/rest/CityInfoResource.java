@@ -30,9 +30,10 @@ import javax.ws.rs.core.MediaType;
  *
  * @author felesiah
  */
-@Path("CityInfo")
+@Path("cityInfo")
 public class CityInfoResource {
-     List<CityInfo> cityinfo; 
+
+    List<CityInfo> cityinfo;
     private static Facade fc = new Facade();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     int nextId = 0;
@@ -47,6 +48,7 @@ public class CityInfoResource {
 
     /**
      * Retrieves representation of an instance of rest.CityInfoResource
+     *
      * @param id
      * @return an instance of java.lang.String
      */
@@ -55,53 +57,49 @@ public class CityInfoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getCity(@PathParam("id") int id) {
         CityInfo cf = fc.getCity(id);
-        if (cf == null){
+        if (cf == null) {
             throw new PersonNotFoundException();
         }
         return gson.toJson(cf);
     }
-    
-@GET
-@Path("/cities")
-@Produces(MediaType.APPLICATION_JSON)
-public String getCities(){
-String city = null ;
-try 
-{
-cityinfo = fc.getZipcodes();
-System.out.println(gson.toJson(cityinfo));
-city = gson.toJson(cityinfo);
-}
-catch (Exception e)
-{
-System.out.println("Exception Error"); //Console 
-}
-return city;
-}
+
+    @GET
+    @Path("cities")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCities() {
+        String city = null;
+        try {
+            cityinfo = fc.getZipcodes();
+            System.out.println(gson.toJson(cityinfo));
+            city = gson.toJson(cityinfo);
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return city;
+    }
 
     /**
      * PUT method for updating or creating an instance of CityInfoResource
+     *
      * @param id
-     * @return 
+     * @return
      */
-  
-  @DELETE
-  @Path("{id}")
-  @Produces(MediaType.APPLICATION_JSON)
-  public String deleteJson(@PathParam("id") int id) {
-    CityInfo ci = cityinfo.remove(id); 
-    return gson.toJson(ci);
-  }
-     
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public String putJson(String cityAsJson) {
-    CityInfo ci = gson.fromJson(cityAsJson, CityInfo.class);
-    ci.setZipCode(nextId); 
-    nextId++;
-    return gson.toJson(ci);
-  }
-    
-    
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteJson(@PathParam("id") int id) {
+        CityInfo ci = cityinfo.remove(id);
+        return gson.toJson(ci);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String putJson(String cityAsJson) {
+        CityInfo ci = gson.fromJson(cityAsJson, CityInfo.class);
+        ci.setZip(nextId);
+        nextId++;
+        return gson.toJson(ci);
+    }
+
 }

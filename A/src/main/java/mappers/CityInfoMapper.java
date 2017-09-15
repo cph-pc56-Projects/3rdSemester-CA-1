@@ -16,7 +16,7 @@ public class CityInfoMapper {
     public String city;
 
     public CityInfoMapper(CityInfo cityinfo) {
-        this.Zip = cityinfo.getZipCode();
+        this.Zip = cityinfo.getZip();
         this.city = cityinfo.getCity();
     }
    
