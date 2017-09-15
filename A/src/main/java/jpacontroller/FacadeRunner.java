@@ -20,9 +20,9 @@ public class FacadeRunner {
         p.setLastName("Moreno");
         fc.addPerson(p);
         System.out.println(fc.getPersons().toString());
-        
-        System.out.println(" getting the city" +fc.getCity(100));
-        
+        System.out.println("finding by zip" + fc.getCity(100));
+        System.out.println(" getting the city" +fc.getZipcodes().toString());
+        System.out.println("List of companies" + fc.getcompanies().toString());
         
         
         

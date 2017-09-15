@@ -74,12 +74,12 @@ public class Main {
         
         
         Company c = new Company();
-        c.setName("Tesla");
+        c.setName("Dong");
         c.setDescription("Energy Company");
         c.setCvr(223321);
-        c.setNumEmpoyees(250000);
-        c.setMarketValue(44000000);
-        c.setEmail("tesla@tesla.com");
+        c.setNumEmpoyees(50);
+        c.setMarketValue(4400);
+        c.setEmail("dong@dongenergy.com");
         Address ac = new Address();
         ac.setStreet("Sun Avenue");
         ac.setAdditionalInfo("Close to SpaceX HQ");

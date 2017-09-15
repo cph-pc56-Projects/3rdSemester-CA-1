@@ -7,7 +7,9 @@ package facade;
 
 import entity.CityInfo;
 import entity.Address;
+import entity.Company;
 import entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -170,10 +172,32 @@ public class Facade {
         }
     }
     
+     public List<CityInfo> getZipcodes() {
+        EntityManager em = emf.createEntityManager();
+        List<CityInfo> cityinfo;
+        try {
+            Query qu = em.createQuery("SELECT c FROM CityInfo c");
+            cityinfo = qu.getResultList();
+            return cityinfo;
+
+        } finally {
+            em.close();
+        }
+    }
     
     
-    
-    
+     public List<Company> getcompanies() {
+        EntityManager em = emf.createEntityManager();
+        List<Company> company;
+        try {
+            Query qu = em.createQuery("SELECT c FROM Company c where c.NumEmpoyees >50");
+            company = qu.getResultList();
+            return company;
+
+        } finally {
+            em.close();
+        }
+    }
     
     
 }
