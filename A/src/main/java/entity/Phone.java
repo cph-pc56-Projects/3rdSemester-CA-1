@@ -14,6 +14,9 @@ import javax.persistence.*;
  */
 @Entity
 public class Phone implements Serializable {
+
+    @ManyToOne
+    private InfoEntity infoEntity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

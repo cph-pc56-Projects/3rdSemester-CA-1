@@ -19,8 +19,8 @@ import javax.persistence.Query;
 public class Facade {
 
     EntityManagerFactory emf;
-    
-    public Facade(){
+
+    public Facade() {
         emf = Persistence.createEntityManagerFactory("pu");
     }
 
@@ -45,7 +45,6 @@ public class Facade {
             em.merge(p);
             em.getTransaction().commit();
             return p;
-
         } finally {
             em.close();
         }
@@ -62,13 +61,10 @@ public class Facade {
                 em.getTransaction().commit();
                 return p;
             }
-
             return null;
-
         } finally {
             em.close();
         }
-
     }
 
     public Person addPerson(Person p) {
@@ -78,11 +74,8 @@ public class Facade {
             em.persist(p);
             em.getTransaction().commit();
             return p;
-
         } finally {
-
         }
-
     }
 
     public List<Person> getPersons() {
@@ -92,6 +85,18 @@ public class Facade {
             Query qu = em.createQuery("SELECT p FROM Person p");
             persons = qu.getResultList();
             return persons;
+
+        } finally {
+            em.close();
+        }
+    }
+
+    public Person getPersonByPhone(int phoneNumber) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            Query qu = em.createQuery("SELECT p, pl FROM Person p join p.phonelist pl where pl = :Number");
+            return (Person)qu.getSingleResult();
 
         } finally {
             em.close();

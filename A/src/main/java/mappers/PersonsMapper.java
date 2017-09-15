@@ -9,10 +9,6 @@ import entity.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author trez__000
- */
 public class PersonsMapper {
     public List<PersonMapper> persons = new ArrayList();
     
