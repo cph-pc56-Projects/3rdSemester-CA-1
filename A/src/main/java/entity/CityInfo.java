@@ -17,16 +17,17 @@ public class CityInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    
-    private int Zip;
+    private int zip;
     private String city;
 
-    public int getZipCode() {
-        return Zip;
+    
+
+    public int getZip() {
+        return zip;
     }
 
-    public void setZipCode(int ZipCode) {
-        this.Zip = ZipCode;
+    public void setZip(int zip) {
+        this.zip = zip;
     }
 
     public String getCity() {
@@ -35,11 +36,6 @@ public class CityInfo implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "CityInfo{" + "Zip=" + Zip + ", city=" + city + '}';
     }
     
     

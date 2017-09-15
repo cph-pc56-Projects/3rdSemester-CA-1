@@ -47,7 +47,8 @@ public class Main {
         
         CityInfo cityinfo = new CityInfo();
         cityinfo.setCity("Copenhagen");
-        cityinfo.setZipCode(1720);
+        cityinfo.setZip(1720);
+        
         
         Address address = new Address();
         address.setStreet("Sonder Boulevard");
@@ -74,12 +75,12 @@ public class Main {
         
         
         Company c = new Company();
-        c.setName("Dong");
+        c.setName("Tesla");
         c.setDescription("Energy Company");
         c.setCvr(223321);
-        c.setNumEmpoyees(50);
-        c.setMarketValue(4400);
-        c.setEmail("dong@dongenergy.com");
+        c.setNumEmpoyees(250000);
+        c.setMarketValue(44000000);
+        c.setEmail("tesla@tesla.com");
         Address ac = new Address();
         ac.setStreet("Sun Avenue");
         ac.setAdditionalInfo("Close to SpaceX HQ");
@@ -109,3 +110,4 @@ public class Main {
         em.close();
     }
 }
+

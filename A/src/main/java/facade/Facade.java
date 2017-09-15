@@ -5,11 +5,9 @@
  */
 package facade;
 
-import entity.CityInfo;
-import entity.Address;
 import entity.Company;
+import entity.Hobby;
 import entity.Person;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,14 +21,13 @@ import javax.persistence.Query;
 public class Facade {
 
     EntityManagerFactory emf;
-    
-    public Facade(){
+
+    public Facade() {
         emf = Persistence.createEntityManagerFactory("pu");
     }
 
     public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
-
         try {
             em.getTransaction().begin();
             Person p = em.find(Person.class, id);
@@ -86,8 +83,22 @@ public class Facade {
         } finally {
 
         }
-
     }
+    
+    public void addHobbyToPerson(Hobby hobby, int personId){
+        EntityManager em = emf.createEntityManager();
+        Person person = getPerson(personId);
+        person.addHobby(hobby);
+        try{
+            em.getTransaction().begin();
+            em.merge(person);
+            em.getTransaction().commit();
+        }
+        finally{
+            em.close();
+        }
+    }
+
     public List<Person> getPersons() {
         EntityManager em = emf.createEntityManager();
         List<Person> persons;
@@ -100,66 +111,74 @@ public class Facade {
             em.close();
         }
     }
+
+    public List<Company> getCompanies() {
+        EntityManager em = emf.createEntityManager();
+        List<Company> companies;
+        try {
+            Query qu = em.createQuery("SELECT c FROM Company c");
+            companies = qu.getResultList();
+            return companies;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Hobby> getHobbies() {
+        EntityManager em = emf.createEntityManager();
+        List<Hobby> hobbies;
+        try {
+            Query qu = em.createQuery("SELECT h FROM Hobby h");
+            hobbies = qu.getResultList();
+            return hobbies;
+        } finally {
+            em.close();
+        }
+    }
     
-    public Address getAddress(int id) {
+    public Hobby getHobby(int hobbyId){
         EntityManager em = emf.createEntityManager();
-        try {
+        Hobby hobby;
+        try{
             em.getTransaction().begin();
-            Address a = em.find(Address.class, id);
+            hobby = em.find(Hobby.class, hobbyId);
             em.getTransaction().commit();
-            return a;
-
-        } finally {
+            return hobby;
+        }
+        finally{
             em.close();
         }
-
     }
 
-    public Address addAddress(Address adr) {
+    public void addHobby(String name, String description) {
         EntityManager em = emf.createEntityManager();
+        Hobby h = new Hobby();
+        h.setName(name);
+        h.setDescription(description);
         try {
             em.getTransaction().begin();
-            em.persist(adr);
+            em.persist(h);
             em.getTransaction().commit();
-            return adr;
-
         } finally {
             em.close();
         }
-
     }
-
-    public Address editAddress(Address ad) {
+    
+    public void addPersonToHobby(Person p, int hobbyId){
         EntityManager em = emf.createEntityManager();
-        try {
+        Hobby hobby = getHobby(hobbyId);
+        hobby.addPerson(p);
+        try{
             em.getTransaction().begin();
-            em.merge(ad);
+            em.merge(hobby);
             em.getTransaction().commit();
-            return ad;
-
-        } finally {
+        }
+        finally{
             em.close();
         }
-
     }
-
-    public Address deleteAddress(Address adress) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Address a = em.find(Address.class, adress.getAdress_id());
-            if (a != null) {
-                em.getTransaction().begin();
-                em.remove(a);
-                em.getTransaction().commit();
-            }
-            return a;
-
-        } finally {
-            em.close();
-        }
-
-    } 
-    public CityInfo getCity(int zipCode){
+  
+  public CityInfo getCity(int zipCode){
         EntityManager em = emf.createEntityManager();
         try{
             em.getTransaction().begin();
@@ -184,20 +203,5 @@ public class Facade {
             em.close();
         }
     }
-    
-    
-     public List<Company> getcompanies() {
-        EntityManager em = emf.createEntityManager();
-        List<Company> company;
-        try {
-            Query qu = em.createQuery("SELECT c FROM Company c where c.NumEmpoyees >50");
-            company = qu.getResultList();
-            return company;
-
-        } finally {
-            em.close();
-        }
-    }
-    
-    
 }
+

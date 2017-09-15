@@ -24,6 +24,7 @@ public class Hobby implements Serializable {
     private String description;
     
     @ManyToMany(targetEntity = Person.class)
+    
     private List<Person> persons;
 
     public List<Person> getPersons() {

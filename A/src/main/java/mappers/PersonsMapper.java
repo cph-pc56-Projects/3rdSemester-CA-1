@@ -16,12 +16,12 @@ import java.util.List;
 public class PersonsMapper {
     public List<PersonMapper> persons = new ArrayList();
     
-    public PersonsMapper(List<Person> persons){
+    public PersonsMapper(List<Person> persons, boolean addHobby){
         for (Person p: persons) {
-            this.persons.add(new PersonMapper(p));
+            this.persons.add(new PersonMapper(p, addHobby));
         }
         
     }
     
 }
- 
+
