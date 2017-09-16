@@ -40,7 +40,7 @@ public class FacadeRunner {
         person.setAddress(address);
         System.out.println(person.getAddress().getCityinfo().getZip());
 
-        List<Person> pZip = new ArrayList();
+        
         List<Person> persons = fc.getPersons();
         for (Person p : persons) {
             if (p.getAddress().getCityinfo().getZip() == 1710) {
