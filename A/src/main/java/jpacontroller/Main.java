@@ -43,7 +43,7 @@ public class Main {
         
         InfoEntity ie = new InfoEntity();
         ie.setEmail("ptc@gmail.com");
-        ie.setPhonelist(phoneList);
+        
         
         CityInfo cityinfo = new CityInfo();
         cityinfo.setCity("Copenhagen");
@@ -71,7 +71,7 @@ public class Main {
         phoneP.setDescription("Emergency Number");
         List<Phone> phonesP = new ArrayList();
         phonesP.add(phoneP);
-        person.setPhonelist(phonesP);
+       
         
         
         Company c = new Company();
@@ -89,7 +89,7 @@ public class Main {
         cp.setDescription("Official Line");
         cp.setNumber(2233323);
         List<Phone> cps = new ArrayList();
-        c.setPhonelist(cps);
+        
         
         Hobby hobby = new Hobby();
         hobby.setName("Reading");

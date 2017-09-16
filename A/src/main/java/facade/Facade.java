@@ -10,6 +10,7 @@ import entity.CityInfo;
 import entity.Company;
 import entity.Hobby;
 import entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -111,6 +112,20 @@ public class Facade {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Person> getPersonsByZip(int zip){        
+        List<Person> pZip = new ArrayList();
+        List<Person> persons = getPersons();
+        for (Person p: persons){
+            if(p.getAddress().getCityinfo().getZip() == zip){
+                pZip.add(p);
+            }
+            else {
+                return null;
+            }
+        }
+        return pZip;
     }
 
     public List<Company> getCompanies() {
