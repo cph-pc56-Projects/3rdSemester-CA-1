@@ -5,8 +5,11 @@
  */
 package mappers;
 
+import entity.Address;
+import entity.CityInfo;
 import entity.Hobby;
 import entity.Person;
+import entity.Phone;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +20,17 @@ import java.util.List;
 public class PersonMapper {
     public String fName;
     public String lName;
+    public Address address;
+    public List<Phone> phoneList;
     public List<String> hobbies;
+    
     
     public PersonMapper(Person person, boolean addHobby){
         this.fName = person.getFirstName();
         this.lName = person.getLastName();
+        this.address = person.getAddress();
+        phoneList = new ArrayList();
+        phoneList = person.getPhonelist();
         if (addHobby){
             hobbies = new ArrayList();
             for (Hobby h: person.getHobbies()){

@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -44,8 +45,12 @@ public class InfoEntity implements Serializable {
         return phonelist;
     }
 
-    public void setPhonelist(List phonelist) {
-        this.phonelist = phonelist;
+    public void addPhone(Phone phone) {
+        if (phonelist == null){
+            this.phonelist = new ArrayList();
+            this.phonelist.add(phone);
+        }
+        this.phonelist.add(phone);
     }
 
     public void setId(int id) {

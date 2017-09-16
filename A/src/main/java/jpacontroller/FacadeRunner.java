@@ -9,6 +9,7 @@ package jpacontroller;
 
 import entity.Hobby;
 import entity.Person;
+import entity.Phone;
 import facade.Facade;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,8 @@ import mappers.HobbyMapper;
 public class FacadeRunner {
     public static void main(String[] args) {
         Facade fc = new Facade();
-        Person person = new Person();
-        person.setFirstName("Sean");
-        person.setLastName("Pen");
-        person.setEmail("seab@pen.com");
         
+        /*
         //fc.addPersonToHobby(person, 4);
         List<Hobby> hobbies = fc.getHobbies();
         HobbiesMapper hsm = new HobbiesMapper(hobbies);
@@ -39,7 +37,19 @@ public class FacadeRunner {
         for(Person p: ppl){
             System.out.println(p.getFirstName());
         }
-       
+       */
+        Phone phone1 = new Phone();
+        phone1.setNumber(50312096);
+        phone1.setDescription("Private mobile number");
         
+        Phone phone2 = new Phone();
+        phone2.setNumber(0041234);
+        phone2.setDescription("Assistant");
+        
+        
+        Person person;
+        person = fc.getPerson(2);
+        person.addPhone(phone2);
+        fc.editPerson(person);
     }
 }

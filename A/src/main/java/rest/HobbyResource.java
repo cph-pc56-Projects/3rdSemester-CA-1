@@ -31,9 +31,9 @@ import mappers.PersonsMapper;
  */
 @Path("hobby")
 public class HobbyResource {
+
     private static Facade fc = new Facade();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    
 
     @Context
     private UriInfo context;
@@ -46,6 +46,7 @@ public class HobbyResource {
 
     /**
      * Retrieves representation of an instance of rest.HobbyResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -62,12 +63,18 @@ public class HobbyResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersonsInHobby(@PathParam("id") int id) {
-        List<Person> ppl = fc.getHobby(id).getPersons();        
-        return gson.toJson(new PersonsMapper(ppl, true));        
+        try {
+            List<Person> ppl = fc.getHobby(id).getPersons();
+            return gson.toJson(new PersonsMapper(ppl, true));
+
+        } catch(Exception e)  {
+            return "No such hobby ID";
+        }
     }
-    
+
     /**
      * PUT method for updating or creating an instance of HobbyResource
+     *
      * @param content representation for the resource
      */
     @PUT
