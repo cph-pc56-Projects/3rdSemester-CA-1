@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
@@ -19,19 +20,17 @@ import javax.ws.rs.core.Response;
 import mappers.PersonMapper;
 import mappers.PersonsMapper;
 
-
 @Path("person")
 public class PersonResource {
+
     private static Facade fc = new Facade();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Context
     private UriInfo context;
 
-   
     public PersonResource() {
     }
 
-    
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,21 +43,32 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response getPerson(@PathParam("id") int id) {
+
+        Person p = fc.getPerson(id);
+        if (p == null) {
+            JsonObject error = new JsonObject();
+            error.addProperty("code", "404");
+            error.addProperty("message", "No person with provided id found");
+            return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(error)).build();
+        }
+        PersonMapper pm = new PersonMapper(p, true);
+        return Response.status(Response.Status.OK).entity(gson.toJson(pm)).build();
         
-            Person p = fc.getPerson(id);
-            if (p == null) {
-                JsonObject error = new JsonObject();
-                error.addProperty("code", "404");
-                error.addProperty("message", "No person with provided id found");
-                return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(error)).build();
-            }
-            PersonMapper pm = new PersonMapper(p, false);
-            return Response.status(Response.Status.OK).entity(gson.toJson(pm)).build();
     }
-    
-   @PUT
+
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-}
 
+    @DELETE
+    @Path("{id}")
+    public String deletePerson(@PathParam("id") int id) {
+
+        if (fc.deletePerson(id) == null) {
+            return "No such person found";
+        }
+        return gson.toJson(fc.deletePerson(id));
+
+    }
+}

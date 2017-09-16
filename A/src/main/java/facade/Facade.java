@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package facade;
+
+import entity.Address;
 import entity.CityInfo;
 import entity.Company;
 import entity.Hobby;
 import entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -57,16 +60,16 @@ public class Facade {
 
         try {
             Person p = em.find(Person.class, id);
-            if (p == null) {
+            if (p != null) {
                 em.getTransaction().begin();
                 em.remove(p);
                 em.getTransaction().commit();
                 return p;
             }
-
-            return null;
-
-        } finally {
+        return null;
+        }
+        
+        finally {
             em.close();
         }
 
@@ -84,17 +87,16 @@ public class Facade {
 
         }
     }
-    
-    public void addHobbyToPerson(Hobby hobby, int personId){
+
+    public void addHobbyToPerson(Hobby hobby, int personId) {
         EntityManager em = emf.createEntityManager();
         Person person = getPerson(personId);
         person.addHobby(hobby);
-        try{
+        try {
             em.getTransaction().begin();
             em.merge(person);
             em.getTransaction().commit();
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
@@ -110,6 +112,20 @@ public class Facade {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Person> getPersonsByZip(int zip){        
+        List<Person> pZip = new ArrayList();
+        List<Person> persons = getPersons();
+        for (Person p: persons){
+            if(p.getAddress().getCityinfo().getZip() == zip){
+                pZip.add(p);
+            }
+            else {
+                return null;
+            }
+        }
+        return pZip;
     }
 
     public List<Company> getCompanies() {
@@ -135,17 +151,16 @@ public class Facade {
             em.close();
         }
     }
-    
-    public Hobby getHobby(int hobbyId){
+
+    public Hobby getHobby(int hobbyId) {
         EntityManager em = emf.createEntityManager();
         Hobby hobby;
-        try{
+        try {
             em.getTransaction().begin();
             hobby = em.find(Hobby.class, hobbyId);
             em.getTransaction().commit();
             return hobby;
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
@@ -163,35 +178,33 @@ public class Facade {
             em.close();
         }
     }
-    
-    public void addPersonToHobby(Person p, int hobbyId){
+
+    public void addPersonToHobby(Person p, int hobbyId) {
         EntityManager em = emf.createEntityManager();
         Hobby hobby = getHobby(hobbyId);
         hobby.addPerson(p);
-        try{
+        try {
             em.getTransaction().begin();
             em.merge(hobby);
             em.getTransaction().commit();
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
-  
-  public CityInfo getCity(int zipCode){
+
+    public CityInfo getCity(int zipCode) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
-            CityInfo c = em.find(CityInfo.class, zipCode);            
-            em.getTransaction().commit();  
+            CityInfo c = em.find(CityInfo.class, zipCode);
+            em.getTransaction().commit();
             return c;
-        }
-        finally{
+        } finally {
             em.close();
         }
     }
-    
-     public List<CityInfo> getZipcodes() {
+
+    public List<CityInfo> getZipcodes() {
         EntityManager em = emf.createEntityManager();
         List<CityInfo> cityinfo;
         try {
@@ -203,5 +216,32 @@ public class Facade {
             em.close();
         }
     }
+    
+    public Address getAddressById(int id){
+        EntityManager em = emf.createEntityManager();
+        Address address;
+        try{
+            em.getTransaction().begin();
+            address = em.find(Address.class, id);
+            em.getTransaction().commit();
+            return address;
+        }
+        finally {
+            em.close();
+        }
+    }
+    
+    public void addCityInfoToAddress(CityInfo city, int addressId){
+        EntityManager em = emf.createEntityManager();
+        try{
+            Address address = getAddressById(addressId);
+            address.setCityinfo(city);
+            em.getTransaction().begin();
+            em.merge(address);
+            em.getTransaction().commit();
+        }
+        finally {
+            em.close();
+        }
+    }
 }
-
