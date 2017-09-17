@@ -9,7 +9,7 @@ Marco Frydshou:
 Content of our Ca:
 
 Our ca contains several web services that interact directly with our database through the browser. Above there is a file available called "Overview of endpoints" Here
-you can seea a list of endpoints you can access easily through our REST API, the methods that are used and the result you get.
+you can see a list of endpoints you can access easily through our REST API, the methods that are used and the result you get.
 
 Who did what:
 
