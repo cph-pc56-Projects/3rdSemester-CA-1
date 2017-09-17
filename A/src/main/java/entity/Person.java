@@ -15,29 +15,36 @@ import javax.persistence.*;
  * @author trez__000
  */
 @Entity
-public class Person extends InfoEntity implements Serializable {      
-    
+public class Person extends InfoEntity implements Serializable {
+
     private String firstName;
     private String lastName;
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Person() {
+    }
+        
     
+
     @ManyToMany(targetEntity = Hobby.class)
     private List<Hobby> hobbies;
+
+ 
 
     public List<Hobby> getHobbies() {
         return hobbies;
     }
 
     public void addHobby(Hobby hobby) {
-        if(hobbies == null){
+        if (hobbies == null) {
             hobbies = new ArrayList();
         }
         hobbies.add(hobby);
     }
-
-    
-    
-
-    
 
     public String getFirstName() {
         return firstName;
@@ -59,6 +66,5 @@ public class Person extends InfoEntity implements Serializable {
     public String toString() {
         return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", hobbies=" + hobbies + '}';
     }
-    
-    
+
 }
