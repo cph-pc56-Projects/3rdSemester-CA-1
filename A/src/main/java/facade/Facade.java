@@ -75,13 +75,12 @@ public class Facade {
 
     }
 
-    public Person addPerson(Person p) {
+    public void addPerson(Person p) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(p);
-            em.getTransaction().commit();
-            return p;
+            em.getTransaction().commit();            
 
         } finally {
 
