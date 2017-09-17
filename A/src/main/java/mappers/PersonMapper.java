@@ -20,6 +20,7 @@ import java.util.List;
 public class PersonMapper {
     public String fName;
     public String lName;
+    public String email;
     public Address address;
     public List<Phone> phoneList;
     public List<String> hobbies;
@@ -28,6 +29,7 @@ public class PersonMapper {
     public PersonMapper(Person person, boolean addHobby){
         this.fName = person.getFirstName();
         this.lName = person.getLastName();
+        this.email = person.getEmail();
         this.address = person.getAddress();
         phoneList = new ArrayList();
         phoneList = person.getPhonelist();
