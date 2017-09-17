@@ -21,8 +21,11 @@ Overall the work was evenly divided.
 Future sprints:
 
 Completing rest of the front-end JavaScript page for city
+
 Completing rest of the front-end JavaScript page for company
+
 Further populate the DB with more test data
+
 Testing with Rest Assured
 
 Average time spent a day (Monday-Sunday):
