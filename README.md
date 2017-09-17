@@ -8,7 +8,9 @@ Marco Frydshou:
 
 Content of our Ca:
 
-Our ca contains several web services that interact directly with our database through the browser. Below you can see a list of endpoints you can access easily through our REST API, the methods that are used and the result you get.
+Our ca contains several web services that interact directly with our database through the browser. Above there is a file available called "Overview of endpoints" Here
+you can seea a list of endpoints you can access easily through our REST API, the methods that are used and the result you get.
+
 Who did what:
 
 Petru & Felisiah did most of the backend,
@@ -25,9 +27,13 @@ Testing with Rest Assured
 
 Average time spent a day (Monday-Sunday):
 Petru Catana: 6,7 H
+
 Felisiah Yolanda: 6,7 H
+
 Patrick Fenger: 6,4 H
+
 Marco Frydshou: 6,4 H
+
 
 Feedback:
 
