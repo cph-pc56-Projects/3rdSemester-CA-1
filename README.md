@@ -51,9 +51,13 @@ This is a very dangerous stage, because now the students’ mindset is no longer
 Here are a few bullet points to make success achievable for 3rd semester:
 
 •	Review and restore the balance for EPH (Exercises per hour), there is an overkill of exercises.
+
 •	Add very concrete examples and supply answer books for the most common complications occurring.
+
 •	Choose one path and go with it. Lars does it one way, Sigurd’s does it another, Christian does it a third & Thomas does it a fourth.
+
 •	Allocate more resources to tutors, hell even get rid of the breakfast on Fridays if that’s what it takes.
+
 
 If we in collaboration are to change this perception of the process throughout the rest of this semester and/or for future semesters, these are some of the stuff that (from a student’s perspective) are prior to change.
 
