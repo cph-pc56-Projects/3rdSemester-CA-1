@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Person information engine</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+    <body>
+
+        <h2>Person information engine</h2>
+        
+        <table id="TablePersons" class = "table">
+            <thead>
+                <tr><th>Id</th><th>First name</th><th>Last name</th></tr>
+            </thead>
+            <tbody id ="TablePersonsBody">
+            </tbody>
+        </table>
+        <table class = "table">
+        <input id="PersonsRefresh" type="button" value="Persons refresh"/><br />        
+        <label>PersonId</label><input id="PersonId" type="text" /><br />
+        <label>PersonFirstName</label><input id="PersonFirstName" type="text" /><br />
+        <label>PersonLastName</label><input id="PersonLastName" type="text" /><br />
+        <label>PersonPhoneNumber</label><input id="PersonPhoneNumber" type="text" /><br />
+        
+        <input id="PersonAdd" type="button" value="Person add" /><br />
+        <input id="PersonEdit" type="button" value="Person edit" /><br />
+        <input id="PersonDelete" type="button" value="Person delete" />
+          
+        </table>
+        <script src="ca1.js"></script>
+    </body>
+</html>
