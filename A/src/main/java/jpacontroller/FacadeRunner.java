@@ -26,29 +26,24 @@ public class FacadeRunner {
         Facade fc = new Facade();
         
         Phone phone1 = new Phone();
-        phone1.setNumber(50312096);
-        phone1.setDescription("Private mobile number");
+        phone1.setNumber(9100000);
+        phone1.setDescription("Private number");
 
         Address address = new Address();
-        address.setStreet("Istegade");
-        address.setAdditionalInfo("The place where the magic happens");
+        address.setStreet("NoraStreet");
+        address.setAdditionalInfo("where the magic happens");
         address.setCityinfo(fc.getCity(1710));
 
-        Person person;
-        person = fc.getPerson(2);
-        person.addPhone(phone1);
-        person.setAddress(address);
-        System.out.println(person.getAddress().getCityinfo().getZip());
-
-        List<Person> pZip = new ArrayList();
-        List<Person> persons = fc.getPersons();
-        for (Person p : persons) {
-            if (p.getAddress().getCityinfo().getZip() == 1710) {
-                System.out.println(p.getFirstName());
-            } else {
-                System.out.println("No persons found");
-            }
-        }
+        
+        Person p = new Person();
+        p.setFirstName("Garry");
+        p.setLastName("Pott");
+        p.setEmail("garry@potter.com");
+        fc.addPerson(p);
+        p.addPhone(phone1);
+        fc.editPerson(p);
+        
+        
 
     }
 }

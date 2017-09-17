@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>People</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    </head>
+    <body>
+        <a href="index.html"><button class="btn btn-success">Home</button></a>
+        <div class="container" style="width: 500px;">
+            <h1>Persons</h1>
+            <div class="table-responsive">
+                <table class="table" id="table" width="500px">
+                    <tr>                    
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Email</td>
+                        <td>Street</td>
+                        <td>Zip</td>
+                        <td>City</td>
+                        <td>Phone Number</td>
+                        <td>Phone Description</td>
+                        <td></td>
+                    </tr>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-default" id="reload">Relod Data</button>
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Email</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="fName"></td>
+                    <td><input type="text" id="lName"></td>
+                    <td><input type="text" id="email"></td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+            <button class="btn btn-primary" id="add">Add New Person</button>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>

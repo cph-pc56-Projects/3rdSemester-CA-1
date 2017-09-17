@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import entity.Person;
 import facade.Facade;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -35,8 +37,8 @@ public class PersonResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
-        List<Person> persons = fc.getPersons();
-        return gson.toJson(new PersonsMapper(persons, false));
+        List<Person> data = fc.getPersons();
+        return gson.toJson(new PersonsMapper(data, true));
     }
 
     @GET
@@ -53,8 +55,36 @@ public class PersonResource {
         }
         PersonMapper pm = new PersonMapper(p, true);
         return Response.status(Response.Status.OK).entity(gson.toJson(pm)).build();
-        
+
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String postPerson(String content) {
+        JsonObject body = new JsonParser().parse(content).getAsJsonObject();
+        String PersonFirstName = "";
+        String PersonLastName = "";
+        String PersonEmail = "";
+        
+        if(body.has("fName")) {
+            PersonFirstName = body.get("fName").getAsString();
+        }
+        if(body.has("lName")) {
+            PersonLastName = body.get("lName").getAsString();
+        }
+        if (body.has("email")){
+            PersonEmail = body.get("email").getAsString();
+        }
+        Person p = new Person();
+        p.setFirstName(PersonFirstName);
+        p.setLastName(PersonLastName);
+        fc.addPerson(p);
+        p.setEmail(PersonEmail);
+        fc.editPerson(p);
+        return gson.toJson(p);
+    }
+    
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
