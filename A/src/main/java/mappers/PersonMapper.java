@@ -6,7 +6,6 @@
 package mappers;
 
 import entity.Address;
-import entity.CityInfo;
 import entity.Hobby;
 import entity.Person;
 import entity.Phone;
