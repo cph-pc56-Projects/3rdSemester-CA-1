@@ -37,8 +37,8 @@ public class PersonResource {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
-        List<Person> persons = fc.getPersons();
-        return gson.toJson(new PersonsMapper(persons, true));
+        List<Person> data = fc.getPersons();
+        return gson.toJson(new PersonsMapper(data, true));
     }
 
     @GET
